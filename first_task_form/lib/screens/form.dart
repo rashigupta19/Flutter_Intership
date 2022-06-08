@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:first_task_form/models/Contacts.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -11,16 +14,19 @@ class Form_Task extends StatefulWidget {
 class _Form_TaskState extends State<Form_Task> {
   TextEditingController tc1 = TextEditingController();
   TextEditingController tc2 = TextEditingController();
-  String name = "";
-  String phone = "";
-  List<String> List_names = <String>[];
-  List<String> List_Phone_numbers = <String>[];
+
+  List<Contacts> contacts = [];
+  // String name = "";
+  // String phone = "";
+  // List<String> List_names = <String>[];
+  // List<String> List_Phone_numbers = <String>[];
 
   _addnames() {
-    name = tc1.text;
-    phone = tc2.text;
-    List_names.insert(0, name);
-    List_Phone_numbers.insert(0, phone);
+    // name = tc1.text;
+    // phone = tc2.text;
+    // List_names.insert(0, name);
+    // List_Phone_numbers.insert(0, phone);
+    contacts.insert(0, Contacts(tc1.text, tc2.text));
     setState(() {});
   }
 
@@ -34,7 +40,7 @@ class _Form_TaskState extends State<Form_Task> {
         ),
         decoration: InputDecoration(
           focusColor: Colors.white,
-          //add prefix icon
+
           prefixIcon: Icon(
             Icons.person_outline_rounded,
             color: Colors.grey,
@@ -52,7 +58,6 @@ class _Form_TaskState extends State<Form_Task> {
 
           hintText: "$field_name",
 
-          //make hint text
           hintStyle: TextStyle(
             color: Colors.grey,
             fontSize: 16,
@@ -60,7 +65,6 @@ class _Form_TaskState extends State<Form_Task> {
             fontWeight: FontWeight.w400,
           ),
 
-          //create lable
           labelText: '$field_name ',
           //lable style
           labelStyle: TextStyle(
@@ -70,6 +74,46 @@ class _Form_TaskState extends State<Form_Task> {
             fontWeight: FontWeight.w400,
           ),
         ));
+  }
+
+  _listView() {
+    return SingleChildScrollView(
+      child: Container(
+          height: 400,
+          child: ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: contacts.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  height: 70,
+                  margin: EdgeInsets.all(2),
+                  color: Color.fromARGB(255, 193, 216, 234),
+                  child: Row(children: [
+                    SizedBox(width: 10),
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 25,
+                      child: Icon(
+                        Icons.person,
+                        size: 40,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    Column(children: [
+                      Text(
+                        '${contacts[index].name} ',
+                        style: GoogleFonts.pacifico(fontSize: 18),
+                      ),
+                      Text(
+                        ' ${contacts[index].phone} ',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ])
+                  ]),
+                );
+              })),
+    );
   }
 
   @override
@@ -82,59 +126,29 @@ class _Form_TaskState extends State<Form_Task> {
         child: Column(
           children: [
             SizedBox(
-              height: 50,
-            ),
-            _textformfield("Name", tc1),
-            SizedBox(height: 10),
-            _textformfield("Phone number", tc2),
-
-            ElevatedButton(
-              onPressed: () {
-                _addnames();
-              },
-              style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(255, 8, 84, 217)),
-              child: const Text(
-                'SUBMIT',
-                style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-              ),
+              height: 30,
             ),
 
-            SizedBox(
-                height: 600,
-                child: ListView.builder(
-                    padding: const EdgeInsets.all(8),
-                    itemCount: List_names.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        height: 70,
-                        margin: EdgeInsets.all(2),
-                        color: Color.fromARGB(255, 193, 216, 234),
-                        child: Row(children: [
-                          SizedBox(width: 10),
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            radius: 25,
-                            child: Icon(
-                              Icons.person,
-                              size: 40,
-                              color: Colors.black,
-                            ),
-                          ),
-                          SizedBox(width: 20),
-                          Column(children: [
-                            Text(
-                              '${List_names[index]} ',
-                              style: GoogleFonts.pacifico(fontSize: 18),
-                            ),
-                            Text(
-                              ' ${List_Phone_numbers[index]} ',
-                              style: TextStyle(fontSize: 18),
-                            ),
-                          ])
-                        ]),
-                      );
-                    })),
+            Form(
+              child: Column(children: [
+                _textformfield("Name", tc1),
+                SizedBox(height: 10),
+                _textformfield("Phone number", tc2),
+                ElevatedButton(
+                  onPressed: () {
+                    _addnames();
+                  },
+                  style: ElevatedButton.styleFrom(
+                      primary: Color.fromARGB(255, 8, 84, 217)),
+                  child: const Text(
+                    'SUBMIT',
+                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                  ),
+                )
+              ]),
+            ),
+
+            _listView()
             // Text('The value is $val')
           ],
         ),
