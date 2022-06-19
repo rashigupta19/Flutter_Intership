@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:riverpod_secondtask/controller/providers.dart';
+import 'package:riverpod_secondtask/providers/providers.dart';
 
 import '../models/Contacts.dart';
 

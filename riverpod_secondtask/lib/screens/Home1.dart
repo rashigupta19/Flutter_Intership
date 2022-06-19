@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:riverpod_secondtask/controller/contact_list_provider.dart';
-import 'package:riverpod_secondtask/controller/providers.dart';
+import 'package:riverpod_secondtask/providers/contact_list_provider.dart';
+import 'package:riverpod_secondtask/providers/providers.dart';
 import 'package:riverpod_secondtask/models/Contacts.dart';
 import 'package:riverpod_secondtask/widgets/contact_list.dart';
 import 'package:riverpod_secondtask/widgets/text_form_field.dart';
@@ -28,6 +28,8 @@ class _Home1State extends State<Home1> {
             loading: () => Text("Loading.. "),
             error: (e, stackTrace) => Text("Error..."));
       })),
+
+      
       body: SingleChildScrollView(
         child: Column(
           children: [
