@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:thirdtask_api/models/university.dart';
 import 'package:thirdtask_api/providers/provider.dart';
 import 'package:thirdtask_api/screens/list_of_universities.dart';
-import 'package:thirdtask_api/utils/api_client.dart';
+import 'package:thirdtask_api/viewModel/api_client.dart';
 import 'package:thirdtask_api/widgets/ListView.dart';
 
 class DropDownButton extends StatelessWidget {
@@ -35,7 +35,6 @@ class DropDownButton extends StatelessWidget {
             onChanged: (String? newValue) {
               ref.read(dropdownProvider.notifier).change(newValue!);
               print(newValue);
-
               ref.refresh(universityStateFuture);
               ListViewWidget();
             });

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:thirdtask_api/providers/provider.dart';
 import 'package:thirdtask_api/models/university.dart';
-import 'package:thirdtask_api/utils/utils.dart';
+import 'package:thirdtask_api/viewModel/utils.dart';
 import 'package:thirdtask_api/widgets/DropDown.dart';
 import 'package:flutter/gestures.dart';
 
