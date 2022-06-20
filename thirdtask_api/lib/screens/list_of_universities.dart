@@ -1,51 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:thirdtask_api/providers/provider.dart';
-import 'package:thirdtask_api/models/university.dart';
+import 'package:thirdtask_api/widgets/DropDown.dart';
+import 'package:thirdtask_api/widgets/ListView.dart';
 
-import '../widgets/list_view_widget.dart';
+class ListOfUniversities extends StatelessWidget {
+  const ListOfUniversities({Key? key}) : super(key: key);
 
-class ListOfUniversities extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    Size deviceSize = MediaQuery.of(context).size;
-    AsyncValue<List<University>> list_university =
-        ref.watch(universityStateFuture);
-
+  Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Universities")),
-        body: list_university.when(
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (e, stackTrace) => Text("Error..."),
-            data: (list_university) {
-              return ListView.builder(
-                  padding: const EdgeInsets.all(8),
-                  itemCount: 20,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      height: 90,
-                      width: deviceSize.width,
-                      margin: EdgeInsets.all(2),
-                      color: Color.fromARGB(255, 193, 216, 234),
-                      child: Row(children: [
-                        Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '${list_university[index].name} ',
-                                style: GoogleFonts.pacifico(fontSize: 18),
-                              ),
-                              Text(' ${list_university[index].country} ',
-                                  style: TextStyle(fontSize: 18)),
-                              Text(
-                                ' ${list_university[index].stateProvince} ',
-                                style: TextStyle(fontSize: 18),
-                              )
-                            ])
-                      ]),
-                    );
-                  });
-            }));
+        backgroundColor: Color.fromARGB(255, 234, 234, 232),
+        appBar: AppBar(
+          title: Text(
+            "Universities",
+            style: TextStyle(color: Color.fromARGB(255, 67, 66, 66)),
+          ),
+          backgroundColor: Colors.amber,
+        ),
+        body: Column(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              height: 40.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30.0),
+                color: Colors.amber,
+              ),
+              child: DropdownButtonHideUnderline(
+                  child: DropDownButton() //  Dropdown Widget
+                  ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            ListViewWidget() //ListView Widget
+          ],
+        ));
   }
 }
