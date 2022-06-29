@@ -30,8 +30,8 @@ class _HomeState extends State<Home> {
       context: context,
       builder: (_) {
         return new AlertDialog(
-          title: Text("PayLoad"),
-          content: Text("Payload : $payload"),
+          title: Text("Notification Text"),
+          content: Text("Message : $payload"),
         );
       },
     );
