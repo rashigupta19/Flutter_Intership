@@ -35,8 +35,8 @@ class DropDownButton extends StatelessWidget {
             onChanged: (String? newValue) {
               ref.read(dropdownProvider.notifier).change(newValue!);
               print(newValue);
-              ref.refresh(universityStateFuture);
               ListViewWidget();
+              ref.refresh(universityStateFuture);
             });
       },
     );
